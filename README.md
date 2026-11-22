@@ -12,6 +12,8 @@ RentoGear is an equipment rental marketplace. Owners list construction tools, ca
 - Equipment search, category / rental type / price / availability filters, sorting and pagination
 - Date-based booking with live price calculation and Stripe Checkout payments
 - Customer dashboard: my rentals, favorites and profile management
+- Owner dashboard: analytics charts, add / update / delete equipment and rentals of my equipment
+- Admin dashboard: platform analytics, user roles, equipment approval and all rentals
 - Light / dark theme toggle, responsive layout, skeleton loaders and toast notifications
 
 ## Tech and packages
