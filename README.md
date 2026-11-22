@@ -2,7 +2,7 @@
 
 RentoGear is an equipment rental marketplace. Owners list construction tools, cameras, vehicles, farm machines, electronics and event gear. Customers search, book for exact dates and pay securely online. Admins approve listings and manage the platform.
 
-**Live URL:** https://YOUR-VERCEL-URL.vercel.app
+**Live URL:** https://rentogear-client.vercel.app
 **Server repository:** https://github.com/arafat-hossain12/rentogear-server
 
 ## Features
