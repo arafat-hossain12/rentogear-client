@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FiHeart, FiList, FiMenu, FiUser } from "react-icons/fi";
+import { FiBarChart2, FiBox, FiHeart, FiList, FiMenu, FiPlusSquare, FiShoppingBag, FiUser, FiUsers } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import { useAuth } from "./AuthProvider";
 import type { Role } from "@/lib/types";
@@ -19,8 +19,20 @@ const menus: Record<Role, MenuItem[]> = {
     { href: "/dashboard/favorites", label: "Favorites", icon: FiHeart },
     { href: "/dashboard/profile", label: "Profile", icon: FiUser },
   ],
-  owner: [{ href: "/dashboard/profile", label: "My Profile", icon: FiUser }],
-  admin: [{ href: "/dashboard/profile", label: "My Profile", icon: FiUser }],
+  owner: [
+    { href: "/dashboard/analytics", label: "Analytics", icon: FiBarChart2 },
+    { href: "/dashboard/add-equipment", label: "Add Equipment", icon: FiPlusSquare },
+    { href: "/dashboard/my-equipment", label: "My Equipment", icon: FiBox },
+    { href: "/dashboard/rentals", label: "Rentals", icon: FiShoppingBag },
+    { href: "/dashboard/profile", label: "Profile", icon: FiUser },
+  ],
+  admin: [
+    { href: "/dashboard/analytics", label: "Analytics", icon: FiBarChart2 },
+    { href: "/dashboard/users", label: "Manage Users", icon: FiUsers },
+    { href: "/dashboard/manage-equipment", label: "Manage Equipment", icon: FiBox },
+    { href: "/dashboard/rentals", label: "All Rentals", icon: FiShoppingBag },
+    { href: "/dashboard/profile", label: "Profile", icon: FiUser },
+  ],
 };
 
 export default function DashboardShell({ children }: { children: React.ReactNode }) {

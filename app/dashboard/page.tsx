@@ -7,8 +7,8 @@ import { useAuth } from "@/components/AuthProvider";
 // Sends each role to its first dashboard page
 const home = {
   customer: "/dashboard/my-rentals",
-  owner: "/dashboard/profile",
-  admin: "/dashboard/profile",
+  owner: "/dashboard/analytics",
+  admin: "/dashboard/analytics",
 } as const;
 
 export default function DashboardIndex() {
