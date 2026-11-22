@@ -24,6 +24,12 @@ export interface EquipmentInput {
 
 const CONDITIONS = ["New", "Like new", "Good", "Fair"];
 
+export const LOCATIONS = [
+  "Dhaka", "Chattogram", "Khulna", "Rajshahi", "Sylhet", "Barishal", "Rangpur", "Mymensingh",
+  "Gazipur", "Narayanganj", "Cumilla", "Bogura", "Jashore", "Cox's Bazar", "Savar", "Tangail",
+];
+const OTHER = "Other";
+
 export default function EquipmentForm({
   initial,
   submitLabel,
@@ -40,7 +46,8 @@ export default function EquipmentForm({
     name: initial?.name || "",
     description: initial?.description || "",
     category: initial?.category || CATEGORIES[0],
-    location: initial?.location || "",
+    location: initial ? (LOCATIONS.includes(initial.location) ? initial.location : OTHER) : "Dhaka",
+    otherLocation: initial && !LOCATIONS.includes(initial.location) ? initial.location : "",
     price: initial ? String(initial.price) : "",
     rentalType: initial?.rentalType || "daily",
     quantity: initial ? String(initial.quantity) : "1",
@@ -78,7 +85,8 @@ export default function EquipmentForm({
     const quantity = Number(f.quantity);
     if (f.name.trim().length < 3) return void toast.error("Equipment name must be at least 3 characters");
     if (f.description.trim().length < 10) return void toast.error("Description must be at least 10 characters");
-    if (f.location.trim().length < 2) return void toast.error("Location is required");
+    const location = f.location === OTHER ? f.otherLocation.trim() : f.location;
+    if (location.length < 2) return void toast.error("Location is required");
     if (!Number.isFinite(price) || price <= 0) return void toast.error("Rental price must be greater than 0");
     if (!Number.isInteger(quantity) || quantity < 1) return void toast.error("Quantity must be a whole number of at least 1");
     if (!f.brand.trim() || !f.model.trim()) return void toast.error("Brand and model are required");
@@ -91,7 +99,7 @@ export default function EquipmentForm({
         name: f.name.trim(),
         description: f.description.trim(),
         category: f.category,
-        location: f.location.trim(),
+        location,
         price,
         rentalType: f.rentalType,
         quantity,
@@ -127,7 +135,20 @@ export default function EquipmentForm({
         </label>
         <label className="block">
           <span className={label}>Location</span>
-          <input className="input input-bordered w-full" value={f.location} onChange={set("location")} placeholder="City or area" />
+          <select className="select select-bordered w-full" value={f.location} onChange={set("location")}>
+            {LOCATIONS.map((l) => (
+              <option key={l}>{l}</option>
+            ))}
+            <option value={OTHER}>Other (type your own)</option>
+          </select>
+          {f.location === OTHER && (
+            <input
+              className="input input-bordered mt-2 w-full"
+              value={f.otherLocation}
+              onChange={set("otherLocation")}
+              placeholder="City or area"
+            />
+          )}
         </label>
         <label className="block">
           <span className={label}>Rental price (USD)</span>
