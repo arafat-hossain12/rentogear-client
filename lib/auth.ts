@@ -9,6 +9,16 @@ export const auth = betterAuth({
   database: mongodbAdapter(db),
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL: process.env.BETTER_AUTH_URL,
+  // Generous limits so testers and tutors sharing one network are not blocked.
+  rateLimit: {
+    enabled: true,
+    window: 60,
+    max: 300,
+    customRules: {
+      "/sign-in/email": { window: 60, max: 60 },
+      "/sign-up/email": { window: 60, max: 60 },
+    },
+  },
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 6,
